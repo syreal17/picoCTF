@@ -43,3 +43,11 @@
     state: directory
     recurse: yes
   when: ('git' in sync_mode) or ('source' in sync_mode)
+
+# Create an admin with strong, procedurely generated pw
+- name: Create admin user
+  user:
+    name: admin
+    comment: For remote competition administration. Strong pseudorandom pw.
+    group: admin
+    password: "{{ lookup('password', '/tmp/picocreds') | password_hash('sha512', 'picosalt') }}"
