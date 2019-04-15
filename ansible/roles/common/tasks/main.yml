@@ -50,4 +50,4 @@
     name: admin
     comment: For remote competition administration. Strong pseudorandom pw.
     group: admin
-    password: "{{ lookup('password', '/tmp/picocreds') | password_hash('sha512', 'picosalt') }}"
+    password: "{{ lookup('password', pico_base_dir + '/' + hostname + '-admin-pw.txt') | password_hash('sha512', 'picosalt') }}"
